@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "62b4ad60b2bc5b2fa147e765"
+  },
+  "name": "Bicep curl",
+  "type": "Arms"
+},{
+  "_id": {
+    "$oid": "62b4c42bb2bc5b2fa147e766"
+  },
+  "name": "Squats",
+  "type": "legs"
+}]
