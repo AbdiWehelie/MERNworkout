@@ -27,19 +27,6 @@ db.once("open", () => console.log("connected to the database"));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 
-// const ExerciseSchema= new mongoose.Schema({
-//   name:
-//     String,
-//   type:
-//     String
-//
-//
-//
-// })
-//
-// const ExerciseModel= mongoose.model("exercises",ExerciseSchema);
-
-
 app.listen(process.env.PORT||3001, ()=>{
   console.log("Server running at 3001");
 })
