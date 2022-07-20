@@ -20,7 +20,7 @@ function App() {
 
 
   useEffect(() => {
-   Axios.get("http://localhost:3001/getExercise").then((response) => {
+   Axios.get("https://mernworkoutdata.herokuapp.com/getExercise").then((response) => {
      setListofExercises( response.data.map((row,index) => ({
             name: row.name,
             type: row.type,
@@ -29,9 +29,6 @@ function App() {
         )
       )
     );
-
-     console.log(listofExercises);
-
 
    });
  }, []);
