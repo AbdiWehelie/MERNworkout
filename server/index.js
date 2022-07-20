@@ -13,10 +13,10 @@ app.use(express.json());
 app.use(cors());
 
 require('dotenv').config();
-console.log(process.env.DB);
+
 
 mongoose.connect(
-  process.env.DB
+  process.env.DATA
 )
 
 let db = mongoose.connection;
