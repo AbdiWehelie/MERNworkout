@@ -9,7 +9,7 @@ export default function Collection(props){
 
 useEffect(()=>{
   setNote(props.collect[index].name)
-  console.log(note);
+
 })
 
 
@@ -20,20 +20,16 @@ useEffect(()=>{
 
 
   function LogNum(num,key){
-    console.log("Row#: "+num);
-    console.log("Exercise key: "+key);
+
     setNote(props.collect[index].name)
     console.log(note);
   }
 
-  const getName=()=>{
-    console.log("From function");
-    console.log(props.collect[index].name);
-  }
+
 
   return(
-    <div id="exercise_name" className="exercise_name" onClick={getName}>
-    {props.collect[index].name}
+    <div id="exercise_name" className="exercise_name" >
+    <span id="exercise">{props.collect[index].name}</span>
   </div>
   )
 }

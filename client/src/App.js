@@ -3,10 +3,11 @@ import 'antd/dist/antd.css';
 import { useState, useEffect,useRef } from "react";
 import Form from 'react-bootstrap/Form'
 import {Divider, Radio,Table,Button} from 'antd'
+import { DownloadOutlined } from '@ant-design/icons';
 import Collection from "./components/collection"
 import Axios from "axios";
 
-// TODO: Make the app look presentable
+
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
   const [note, setNote]=useState("")
   const [name, setName] = useState("");
   const [type, setType]=useState("");
-  //const [exerciseType, setExerciseType]=useState("")
+
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
 
@@ -33,7 +34,7 @@ function App() {
    });
  }, []);
 
-
+// For local use only
  const createExecise=()=>{
    Axios.post("http://localhost:3001/createExecise",{
      name,
@@ -49,9 +50,10 @@ function App() {
       })
    }
 
-
+//Gets the table data from the list of exercises obtained from the database
 const dataSource=[{listofExercises}]
 
+//responable for the structure on function of the table columns
 const columns=[
   {
    title: 'Name',
@@ -70,8 +72,24 @@ const columns=[
        value: 'Arms',
      },
      {
+       text: 'Back',
+       value: 'Back',
+     },
+     {
+       text: 'Biceps',
+       value: 'Biceps',
+     },
+     {
        text: 'Core',
        value: 'Core',
+     },
+     {
+       text: 'Legs',
+       value: 'Legs',
+     },
+     {
+       text: 'Triceps',
+       value: 'Triceps',
      },
    ],
    onFilter: (value: string, record) => record.type.indexOf(value) === 0,
@@ -80,8 +98,7 @@ const columns=[
 ]
 
 const onSelectChange = (newSelectedRowKeys) => {
-  console.log('selectedRowKeys changed: ', selectedRowKeys);
-  console.log(selectedRowKeys[newSelectedRowKeys]);
+  //saves selected rows in state
   setSelectedRowKeys(newSelectedRowKeys);
 
 };
@@ -92,8 +109,7 @@ const rowSelection = {
 };
 const hasSelected = selectedRowKeys.length > 0;
 
-// const text=document.getElementById("exercise_collection")
-// console.log(text);
+
 
 
 const getNames=()=>{
@@ -104,10 +120,10 @@ const getNames=()=>{
   exportExercise(string)
 }
 
-
+//takes the selected exercises and exports them into a .txt file
 function exportExercise(exercise) {
   console.log("exportExercise: "+exercise);
-  let fileData = JSON.stringify("Workout menu: "+exercise);
+  let fileData = JSON.stringify(" "+exercise);
   fileData = fileData.replace(/\\n/g, ' ');
   const blob = new Blob([fileData], { type: "text/plain" });
   const url = URL.createObjectURL(blob);
@@ -122,12 +138,13 @@ function exportExercise(exercise) {
   return (
     <div className="App">
 
-<div>
-      <Button onClick={getNames}>Generate list</Button>
 
-</div>
 <div id='exercise_collection' ref={ref}>
-<br/>
+<h2 style={{
+  fontWeight: 'bold',
+  fontStyle: 'oblique',
+  fontSize: "large"
+}}>Workout menu:</h2>
 <br/>
 {listofExercises.map((exercise,index) =>
 {
@@ -142,14 +159,19 @@ function exportExercise(exercise) {
     dataSource={listofExercises}
     columns={columns}
     rowSelection={rowSelection}
+    pagination={{
+          position: ["none","none"],
+        }}
+        scroll={{
+      y: 390,
+    }}
     />
-            <div>
-                {<h3 onClick={getNames}>{note}</h3>}
-                {note !="" && note!= undefined &&
-
-                <Button style={{backgorundColor:"rgb(103, 115, 215)"}} onClick={exportExercise}>Get workout menu</Button>
-                }
-            </div>
+    <div>
+<br/>
+          <Button onClick={getNames}  type="primary" shape="round" icon={<DownloadOutlined />} size={'large'}>
+       Get Workout menu
+     </Button>
+    </div>
 </div>
   );
 }
