@@ -16,7 +16,7 @@ require('dotenv').config();
 
 // TODO: make .env of the MongoDB connection link
 mongoose.connect(
-  "mongodb+srv://user123:Password123@cluster0.iozvx4n.mongodb.net/workoutdb?retryWrites=true&w=majority"
+  process.env.DATA
 )
 
 let db = mongoose.connection;
